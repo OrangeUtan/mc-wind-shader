@@ -1,0 +1,9 @@
+{
+    "name": "MC Wind Shader",
+    "author": "Oran9eUtan",
+    "description": "A Shader adding wind to Minecraft",
+    "resource_pack": {
+        "load": ["resourcepack"]
+    },
+    "output": "build"
+}

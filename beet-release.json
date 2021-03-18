@@ -1,0 +1,11 @@
+{
+    "extend": ["beet.json"],
+    "output": "releases",
+    "version": "0.1.0",
+    "resource_pack": {
+        "zipped": true
+    },
+    "pipeline": [
+        "beet.contrib.minify_json"
+    ]
+}
