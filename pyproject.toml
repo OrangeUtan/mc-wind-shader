@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wind"
-version = "0.1.0"
+version = "1.0.0"
 description = "A Shader adding wind to Minecraft"
 authors = ["Oran9eUtan"]
 
