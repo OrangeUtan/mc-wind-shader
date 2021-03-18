@@ -20,4 +20,3 @@ search = 'version = "{current_version}"'
 
 [[file]]
 src = "beet-release.json"
-
