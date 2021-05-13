@@ -1,13 +1,3 @@
-[tool.poetry]
-name = "wind"
-version = "1.0.1"
-description = "A wind shader for Vanilla Minecraft"
-authors = ["Oran9eUtan"]
-license = "MIT"
-readme = "README.md"
-homepage = "https://github.com/OrangeUtan/mc-wind-shader"
-repository = "https://github.com/OrangeUtan/mc-wind-shader"
-
 [tool.poetry.dependencies]
 python = "^3.9"
 beet = "^0.13.0"
