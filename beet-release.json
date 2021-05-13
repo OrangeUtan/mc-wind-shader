@@ -1,9 +1,10 @@
 {
     "extend": ["beet.json"],
-    "output": "releases",
+    "output": "release",
     "version": "1.0.1",
     "resource_pack": {
-        "zipped": true
+        "zipped": true,
+        "name": "wind-shader"
     },
     "pipeline": [
         "beet.contrib.minify_json"
