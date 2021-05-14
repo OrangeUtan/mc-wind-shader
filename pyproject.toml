@@ -30,3 +30,4 @@ version_toml = "pyproject.toml:tool.poetry.version"
 version_pattern = "beet-release.json:(\\d+\\.\\d+\\.\\d+)"
 major_on_zero = false
 build_command = "beet build"
+upload_to_pypi = false
