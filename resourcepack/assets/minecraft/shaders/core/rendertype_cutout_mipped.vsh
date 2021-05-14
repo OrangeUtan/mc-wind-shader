@@ -1,5 +1,7 @@
 #version 150
 
+#moj_import <light.glsl>
+
 in vec3 Position;
 in vec4 Color;
 in vec2 UV0;
@@ -18,17 +20,17 @@ out vec4 vertexColor;
 out vec2 texCoord0;
 out vec4 normal;
 
-#define atlas_size 1024.0
-#define texture_size 16.0
-#define IS_TEXTURE(tx, ty, uvx, uvy) uvx >= tx/atlas_size && uvx <= tx/atlas_size + texture_size/atlas_size && uvy >= ty/atlas_size && uvy <= ty/atlas_size + texture_size/atlas_size
-#define IS_TEXTURE_H(tx, ty, height, uvx, uvy) uvx >= tx/atlas_size && uvx <= tx/atlas_size + texture_size/atlas_size && uvy >= ty/atlas_size && uvy <= ty/atlas_size + height/atlas_size
-#define IS_TEXTURE_W(tx, ty, width, uvx, uvy) uvx >= tx/atlas_size && uvx <= tx/atlas_size + width/atlas_size && uvy >= ty/atlas_size && uvy <= ty/atlas_size + texture_size/atlas_size
+#define atlas_size 64 // Number of textures on the atlas per row and column
+#define texture_size_pixels 16.0 // Texture size in pixels
+float texture_size_atlas = 1.0 / atlas_size; // Texture size relative to atlas size
 
-#define IS_OAK(uvx, uvy) IS_TEXTURE_H(144.0, 72.0, 216.0, uvx, uvy)
-#define IS_DARK_OAK(uvx, uvy) IS_TEXTURE(288.0, 64.0, uvx, uvy)
-#define IS_SPRUCE(uvx, uvy) IS_TEXTURE(16.0, 368.0, uvx, uvy)
-#define IS_ACACIA(uvx, uvy) IS_TEXTURE_W(144.0, 72.0, 12.0, uvx, uvy)
-#define IS_BIRCH(uvx, uvy) IS_TEXTURE(256.0, 48.0, uvx, uvy)
+#define IS_ATLAS_TEXTURE(row, column, uvx, uvy) uvx >= row*texture_size_atlas && uvx <= (row+1)*texture_size_atlas && uvy >= column*texture_size_atlas && uvy <= (column+1)*texture_size_atlas
+
+#define IS_OAK_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(10, 17, uvx, uvy)
+#define IS_DARK_OAK_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(18, 4, uvx, uvy)
+#define IS_SPRUCE_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(5, 23, uvx, uvy)
+#define IS_ACACIA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(10, 6, uvx, uvy)
+#define IS_BIRCH_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(16, 3, uvx, uvy)
 
 void main() {
     vec3 position = Position + ChunkOffset;
@@ -37,7 +39,13 @@ void main() {
     float offset_x = 0.0;
     float offset_z = 0.0;
 
-    if(IS_DARK_OAK(UV0.x, UV0.y) || IS_OAK(UV0.x, UV0.y) || IS_SPRUCE(UV0.x, UV0.y) || IS_ACACIA(UV0.x, UV0.y) || IS_BIRCH(UV0.x, UV0.y)) {
+    if(
+        IS_JUNGLE_LEAVES(UV0.x, UV0.y)
+        || IS_DARK_OAK_LEAVES(UV0.x, UV0.y)
+        || IS_SPRUCE_LEAVES(UV0.x, UV0.y)
+        || IS_ACACIA_LEAVES(UV0.x, UV0.y)
+        || IS_BIRCH_LEAVES(UV0.x, UV0.y)
+    ) {
         // Wind (same for every tree)
         float wind_strength = (0.8 + sin(time)) * (2 + sin(time/30)*1.5);
         #define wind_dir_change_speed 0.005
@@ -60,13 +68,12 @@ void main() {
         // Offsets
         offset_x = wind_x + wobble_x + gust_x;
         offset_z = wind_z + wobble_z + gust_z;
-
     }
 
-    gl_Position = ProjMat * ModelViewMat * (vec4(position, 1.0) + vec4(offset_x / texture_size, 0.0, offset_z / texture_size, 0.0));
+    gl_Position = ProjMat * ModelViewMat * vec4(Position + ChunkOffset + vec3(offset_x / texture_size_pixels, 0.0, offset_z / texture_size_pixels), 1.0);
 
     vertexDistance = length((ModelViewMat * vec4(Position + ChunkOffset, 1.0)).xyz);
-    vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
+    vertexColor = Color * minecraft_sample_lightmap(Sampler2, UV2);
     texCoord0 = UV0;
     normal = ProjMat * ModelViewMat * vec4(Normal, 0.0);
 }
