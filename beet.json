@@ -1,9 +1,10 @@
 {
     "name": "MC Wind Shader",
     "author": "Oran9eUtan",
-    "description": "A Shader adding wind to Minecraft",
+    "description": "A wind shader for Vanilla Minecraft (no Optifine)",
     "resource_pack": {
-        "load": ["resourcepack"]
+        "load": ["resourcepack"],
+        "pack_format": 7
     },
     "output": "build"
 }
