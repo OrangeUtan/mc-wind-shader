@@ -31,6 +31,9 @@ float texture_size_atlas = 1.0 / atlas_size; // Texture size relative to atlas s
 #define IS_SPRUCE_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(5, 23, uvx, uvy)
 #define IS_ACACIA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(10, 6, uvx, uvy)
 #define IS_BIRCH_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(16, 3, uvx, uvy)
+#define IS_AZALEA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(12, 0, uvx, uvy)
+#define IS_FLOWERING_AZALEA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(12, 1, uvx, uvy)
+#define IS_JUNGLE_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(28, 0, uvx, uvy)
 
 void main() {
     vec3 position = Position + ChunkOffset;
@@ -45,6 +48,9 @@ void main() {
         || IS_SPRUCE_LEAVES(UV0.x, UV0.y)
         || IS_ACACIA_LEAVES(UV0.x, UV0.y)
         || IS_BIRCH_LEAVES(UV0.x, UV0.y)
+        || IS_AZALEA_LEAVES(UV0.x, UV0.y)
+        || IS_FLOWERING_AZALEA_LEAVES(UV0.x, UV0.y)
+        || IS_JUNGLE_LEAVES(UV0.x, UV0.y)
     ) {
         // Wind (same for every tree)
         float wind_strength = (0.8 + sin(time)) * (2 + sin(time/30)*1.5);
