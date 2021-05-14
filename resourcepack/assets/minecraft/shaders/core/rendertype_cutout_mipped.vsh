@@ -4,8 +4,8 @@
 
 in vec3 Position;
 in vec4 Color;
-in vec2 UV0;
-in ivec2 UV2;
+in vec2 UV_Texture;
+in ivec2 UV_Mipped_Texture;
 in vec3 Normal;
 
 uniform sampler2D Sampler2;
@@ -43,14 +43,14 @@ void main() {
     float offset_z = 0.0;
 
     if(
-        IS_JUNGLE_LEAVES(UV0.x, UV0.y)
-        || IS_DARK_OAK_LEAVES(UV0.x, UV0.y)
-        || IS_SPRUCE_LEAVES(UV0.x, UV0.y)
-        || IS_ACACIA_LEAVES(UV0.x, UV0.y)
-        || IS_BIRCH_LEAVES(UV0.x, UV0.y)
-        || IS_AZALEA_LEAVES(UV0.x, UV0.y)
-        || IS_FLOWERING_AZALEA_LEAVES(UV0.x, UV0.y)
-        || IS_JUNGLE_LEAVES(UV0.x, UV0.y)
+        IS_JUNGLE_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_DARK_OAK_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_SPRUCE_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_ACACIA_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_BIRCH_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_AZALEA_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_FLOWERING_AZALEA_LEAVES(UV_Texture.x, UV_Texture.y)
+        || IS_JUNGLE_LEAVES(UV_Texture.x, UV_Texture.y)
     ) {
         // Wind (same for every tree)
         float wind_strength = (0.8 + sin(time)) * (2 + sin(time/30)*1.5);
@@ -79,7 +79,7 @@ void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position + ChunkOffset + vec3(offset_x / texture_size_pixels, 0.0, offset_z / texture_size_pixels), 1.0);
 
     vertexDistance = length((ModelViewMat * vec4(Position + ChunkOffset, 1.0)).xyz);
-    vertexColor = Color * minecraft_sample_lightmap(Sampler2, UV2);
-    texCoord0 = UV0;
+    vertexColor = Color * minecraft_sample_lightmap(Sampler2, UV_Mipped_Texture);
+    texCoord0 = UV_Texture;
     normal = ProjMat * ModelViewMat * vec4(Normal, 0.0);
 }

@@ -9,8 +9,8 @@
     "attributes": [
         "Position",
         "Color",
-        "UV0",
-        "UV2",
+        "UV_Texture",
+        "UV_Mipped_Texture",
         "Normal"
     ],
     "samplers": [
