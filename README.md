@@ -1,2 +1,2 @@
 # MC Wind Shader
-A Shader adding wind to Minecraft
+A wind shader for Vanilla Minecraft (no Optifine required)
