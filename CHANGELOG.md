@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.1 (2021-06-02)
+### Fix
+* Fixed UV coords for 1.17-pre3 ([`72d95dd`](https://github.com/OrangeUtan/mc-wind-shader/commit/72d95dd2f25892c1d72b82e1f88d6ef845fe6de1))
+
 ## v1.2.0 (2021-05-14)
 ### Feature
 * Changed resourepack icon ([`11d3e55`](https://github.com/OrangeUtan/mc-wind-shader/commit/11d3e5563c4013fe30042dd4003d53de52018935))
