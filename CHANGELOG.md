@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2021-06-17)
+### Feature
+* Updated UVs for 1.17 ([`a5be110`](https://github.com/OrangeUtan/mc-wind-shader/commit/a5be110b1e1c5d72b06cc28de0a23c7afc50cbce))
+
 ## v1.2.1 (2021-06-02)
 ### Fix
 * Fixed UV coords for 1.17-pre3 ([`72d95dd`](https://github.com/OrangeUtan/mc-wind-shader/commit/72d95dd2f25892c1d72b82e1f88d6ef845fe6de1))
