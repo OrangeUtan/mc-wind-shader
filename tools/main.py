@@ -1,4 +1,3 @@
-import io
 import PIL.Image as Image
 import typer
 from pathlib import Path
@@ -36,7 +35,7 @@ def find_textures_in_atlas(
 	table.align["texture"] = "l"
 
 	atlas = cv2.imread(str(atlas))
-	for path in Path("textures").iterdir():
+	for path in Path("tools/textures").iterdir():
 		texture = cv2.imread(str(path))
 		x, y = get_texture_location_in_atlas(atlas, texture)
 		table.add_row([path, int(x/16), int(y/16)])
