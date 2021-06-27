@@ -1,0 +1,8 @@
+extend: ["beet.yml"]
+output: "dist"
+version: "1.2.1"
+resource_pack:
+  zipped: true
+  name: wind-shader
+pipeline:
+  - beet.contrib.minify_json"
