@@ -8,7 +8,7 @@ from beet.core.cache import Cache
 logger = getLogger(__name__)
 
 def beet_default(ctx: Context):
-	cache = ctx.cache["texture_uvs"]
+	cache = ctx.cache["texture_atlas"]
 
 	config = ctx.meta["texture_atlas"]
 	minecraft_version = config["minecraft_version"]

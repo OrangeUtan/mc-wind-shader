@@ -3,6 +3,7 @@ output: "dist"
 version: "1.2.1"
 resource_pack:
   zipped: true
-  name: wind-shader
+  name: "{{ project_name }}-{{ project_version }}_{{ project_variant }}"
 pipeline:
-  - beet.contrib.minify_json"
+  - beet.contrib.minify_json
+
