@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2021-06-27)
+### Feature
+* Releases for multiple texture atlases ([`82ff23e`](https://github.com/OrangeUtan/mc-wind-shader/commit/82ff23e9eefb2bdc455ae178b6a6eeaf87c99a2f))
+
 ## v1.3.0 (2021-06-17)
 ### Feature
 * Updated UVs for 1.17 ([`a5be110`](https://github.com/OrangeUtan/mc-wind-shader/commit/a5be110b1e1c5d72b06cc28de0a23c7afc50cbce))
