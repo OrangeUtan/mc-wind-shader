@@ -2,8 +2,9 @@ from logging import getLogger
 import csv
 from pathlib import Path
 from beet import Context
-from zipfile import ZipFile
 from beet.core.cache import Cache
+
+from windshader import utils
 
 logger = getLogger(__name__)
 
@@ -16,15 +17,7 @@ def beet_default(ctx: Context):
 
 	config["uvs"] = get_texture_category_uvs(cache, minecraft_version, atlas_variant, "block")
 
-def get_uvs_root(cache: Cache, minecraft_version: str):
-	uvs_zip_path = cache.download(f"https://github.com/OrangeUtan/mc-atlas-uv-resolver/releases/download/res{minecraft_version}/uvs.zip")
-	extracted_uvs_path = cache.get_path(f"uvs")
 
-	if cache.has_changed(uvs_zip_path):
-		with ZipFile(uvs_zip_path, "r") as zip:
-			zip.extractall(extracted_uvs_path)
-
-	return extracted_uvs_path
 
 def get_texture_category_uvs(
 	cache: Cache,
@@ -32,7 +25,7 @@ def get_texture_category_uvs(
 	atlas_category: str,
 	texture_category: str,
 ):
-	uvs_root = get_uvs_root(cache, minecraft_version)
+	uvs_root = utils.get_uvs_root(cache, minecraft_version)
 	uvs_file = Path(uvs_root / atlas_category, texture_category + ".csv")
 
 	uvs: dict[str, dict] = {}
