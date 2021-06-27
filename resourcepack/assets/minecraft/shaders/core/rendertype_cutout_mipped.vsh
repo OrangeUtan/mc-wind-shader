@@ -20,20 +20,19 @@ out vec4 vertexColor;
 out vec2 texCoord0;
 out vec4 normal;
 
-#define atlasTileDim 64 // Atlas dimensions in texture tiles
+#define atlasTileDim 1024.0 // Atlas dimensions in texture tiles
 #define tileSizePixels 16.0 // Texture tile size in pixels
-float tileSizeAtlas = 1.0 / atlasTileDim; // Texture tile size relative to atlas size
 
-#define IS_ATLAS_TEXTURE(row, column, uvx, uvy) uvx >= row*tileSizeAtlas && uvx <= (row+1)*tileSizeAtlas && uvy >= column*tileSizeAtlas && uvy <= (column+1)*tileSizeAtlas
+#define IS_ATLAS_TEXTURE(u, v, x, y) x >= u/atlasTileDim && x <= (u+16)/atlasTileDim && y >= v/atlasTileDim && y <= (v+16)/atlasTileDim
 
-#define IS_ACACIA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(12, 16, uvx, uvy)
-#define IS_AZALEA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(18, 0, uvx, uvy)
-#define IS_BIRCH_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(20, 2, uvx, uvy)
-#define IS_DARK_OAK_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(29, 8, uvx, uvy)
-#define IS_FLOWERING_AZALEA_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(26, 18, uvx, uvy)
-#define IS_JUNGLE_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(6, 21, uvx, uvy)
-#define IS_OAK_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(6, 24, uvx, uvy)
-#define IS_SPRUCE_LEAVES(uvx, uvy) IS_ATLAS_TEXTURE(10, 30, uvx, uvy)
+#define IS_ACACIA_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/acacia_leaves'].u }}, {{ texture_atlas.uvs['block/acacia_leaves'].v }}, x, y)
+#define IS_AZALEA_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/azalea_leaves'].u }}, {{ texture_atlas.uvs['block/azalea_leaves'].v }}, x, y)
+#define IS_BIRCH_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/birch_leaves'].u }}, {{ texture_atlas.uvs['block/birch_leaves'].v }}, x, y)
+#define IS_DARK_OAK_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/dark_oak_leaves'].u }}, {{ texture_atlas.uvs['block/dark_oak_leaves'].v }}, x, y)
+#define IS_FLOWERING_AZALEA_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/flowering_azalea_leaves'].u }}, {{ texture_atlas.uvs['block/flowering_azalea_leaves'].v }}, x, y)
+#define IS_JUNGLE_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/jungle_leaves'].u }}, {{ texture_atlas.uvs['block/jungle_leaves'].v }}, x, y)
+#define IS_OAK_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/oak_leaves'].u }}, {{ texture_atlas.uvs['block/oak_leaves'].v }}, x, y)
+#define IS_SPRUCE_LEAVES(x, y) IS_ATLAS_TEXTURE({{ texture_atlas.uvs['block/spruce_leaves'].u }}, {{ texture_atlas.uvs['block/spruce_leaves'].v }}, x, y)
 
 void main() {
     vec3 position = Position + ChunkOffset;

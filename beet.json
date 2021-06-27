@@ -1,10 +1,22 @@
 {
-    "name": "MC Wind Shader",
-    "author": "Oran9eUtan",
-    "description": "A wind shader for Vanilla Minecraft (no Optifine)",
-    "resource_pack": {
-        "load": ["resourcepack"],
-        "pack_format": 7
+  "name": "MC Wind Shader",
+  "author": "Oran9eUtan",
+  "description": "A wind shader for Vanilla Minecraft (no Optifine)",
+  "resource_pack": {
+    "load": ["resourcepack"],
+    "pack_format": 7
+  },
+  "output": "build",
+  "pipeline": ["windshader.plugins.texture_uvs", "beet.contrib.render"],
+  "meta": {
+    "render": {
+      "resource_pack": {
+        "vertex_shaders": ["minecraft:*"]
+      }
     },
-    "output": "build"
+    "texture_atlas": {
+      "minecraft_version": "1.17",
+      "variant": "vanilla"
+    }
+  }
 }
