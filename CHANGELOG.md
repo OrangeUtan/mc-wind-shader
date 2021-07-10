@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2021-07-10)
+### Feature
+* Wind for water ([`aeb4e23`](https://github.com/OrangeUtan/mc-wind-shader/commit/aeb4e230eca71b1f2a9f8ccf39c1c97bc122c0e5))
+* Wind for azalea ([`69c8c85`](https://github.com/OrangeUtan/mc-wind-shader/commit/69c8c852b302ee3696e65fdace1812ddf4836759))
+* Wind for vines ([`b812600`](https://github.com/OrangeUtan/mc-wind-shader/commit/b8126003f184c4dde9cc74a1bb359197f9639dd5))
+* Wind for grass ([`45e1220`](https://github.com/OrangeUtan/mc-wind-shader/commit/45e122076e8838f4a31054d3852dbfebf0c0be1b))
+
+### Fix
+* Reduce overal wind strength ([`5787fba`](https://github.com/OrangeUtan/mc-wind-shader/commit/5787fba7a4883eca24f052a4ed6c8493edb5dc17))
+
 ## v1.4.0 (2021-06-27)
 ### Feature
 * Releases for multiple texture atlases ([`82ff23e`](https://github.com/OrangeUtan/mc-wind-shader/commit/82ff23e9eefb2bdc455ae178b6a6eeaf87c99a2f))

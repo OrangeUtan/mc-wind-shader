@@ -1,6 +1,6 @@
 extend: ["beet.yml"]
 output: "dist"
-version: "1.4.0"
+version: "1.5.0"
 resource_pack:
   zipped: true
   name: "{{ project_name }}-{{ project_version }}_{{ project_variant }}"
