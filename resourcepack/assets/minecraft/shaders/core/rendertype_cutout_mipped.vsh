@@ -20,6 +20,15 @@ out vec4 vertexColor;
 out vec2 texCoord0;
 out vec4 normal;
 
+// Settings
+#define wind_strength 0.5
+#define wind_oscillation_speed 0.8
+#define wobble_strength 0.4
+#define wobble_speed 1.5
+#define gust_strength 0.4
+
+// Utils
+
 #define atlasTileDim 1024.0 // Atlas dimensions in texture tiles
 #define tileSizePixels 16.0 // Texture tile size in pixels
 
@@ -52,23 +61,23 @@ void main() {
         || IS_SPRUCE_LEAVES(UV_Texture.x, UV_Texture.y)
     ) {
         // Wind (same for every tree)
-        float wind_strength = (0.8 + sin(time)) * (2 + sin(time/30)*1.5);
+        #define wind_oscillation_t (0.8 + sin(time*wind_oscillation_speed))
+        #define wind_oscillation_strength_t (2 + sin(time/30)*1.5)
+        float wind_strength_t = wind_oscillation_t * wind_oscillation_strength_t * wind_strength;
         #define wind_dir_change_speed 0.005
         #define wind_dir_x cos(time * wind_dir_change_speed)
         #define wind_dir_z sin(time * wind_dir_change_speed)
-        float wind_x = wind_strength * wind_dir_x;
-        float wind_z = wind_strength * wind_dir_z;
+        float wind_x = wind_strength_t * wind_dir_x;
+        float wind_z = wind_strength_t * wind_dir_z;
 
         // Wobble
-        #define wobble_strength 0.4
-        #define wobble_speed 2
         float wobble_x = wobble_strength * cos(position.x + time*wobble_speed);
         float wobble_z = wobble_strength * sin(position.z + time*wobble_speed);
 
         // Gust
-        float gust_strength = max(0,sin(position.x/80 + time/5)*25-24) * 0.8;
-        float gust_x = sin(position.x*3 + time*30)/4 * gust_strength;
-        float gust_z = cos(position.z*3 + time*30)/4 * gust_strength;
+        float gust_strength_t = max(0,sin(position.x/80 + time/5)*25-24) * gust_strength;
+        float gust_x = sin(position.x*3 + time*30)/4 * gust_strength_t;
+        float gust_z = cos(position.z*3 + time*30)/4 * gust_strength_t;
 
         // Offsets
         offset_x = wind_x + wobble_x + gust_x;

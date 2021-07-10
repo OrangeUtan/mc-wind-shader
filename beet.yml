@@ -14,4 +14,4 @@ meta:
       vertex_shaders: ["minecraft:*"]
   texture_atlas:
     minecraft_version: "1.17"
-    variant: vanilla
+    variant: optifine
