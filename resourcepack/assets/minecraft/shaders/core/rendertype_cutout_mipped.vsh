@@ -23,6 +23,7 @@ out vec4 normal;
 // Settings
 #define wind_strength 0.5
 #define wind_oscillation_speed 0.8
+#define wind_dir_change_speed 0.005
 #define wobble_strength 0.4
 #define wobble_speed 1.5
 #define gust_strength 0.4
@@ -71,7 +72,6 @@ void main() {
     #define wind_oscillation_t (0.8 + sin(time*wind_oscillation_speed))
     #define wind_oscillation_strength_t (2 + sin(time/30)*1.5)
     float wind_strength_t = wind_oscillation_t * wind_oscillation_strength_t * wind_strength;
-    #define wind_dir_change_speed 0.005
     #define wind_dir_x cos(time * wind_dir_change_speed)
     #define wind_dir_z sin(time * wind_dir_change_speed)
     float wind_x = wind_strength_t * wind_dir_x;
