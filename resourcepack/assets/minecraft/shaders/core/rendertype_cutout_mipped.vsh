@@ -47,6 +47,7 @@ out vec4 normal;
 #define VERTICES_TALL_GRASS_TOP(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/tall_grass_top'].u }}, {{ texture_atlas.uvs['block/tall_grass_top'].v }}, x, y)
 #define VERTICES_TALL_GRASS_TOP_TOP(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/tall_grass_top'].u }}, {{ texture_atlas.uvs['block/tall_grass_top'].v }}, x, y)
 #define VERTICES_TALL_GRASS_BOTTOM(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/tall_grass_bottom'].u }}, {{ texture_atlas.uvs['block/tall_grass_bottom'].v }}, x, y)
+#define VERTICES_VINE(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/vine'].u }}, {{ texture_atlas.uvs['block/vine'].v }}, x, y)
 
 void main() {
     vec3 position = Position + ChunkOffset;
@@ -84,10 +85,13 @@ void main() {
         || VERTICES_JUNGLE_LEAVES(UV_Texture.x, UV_Texture.y)
         || VERTICES_OAK_LEAVES(UV_Texture.x, UV_Texture.y)
         || VERTICES_SPRUCE_LEAVES(UV_Texture.x, UV_Texture.y)
+        || VERTICES_VINE(UV_Texture.x, UV_Texture.y)
     ) {
+        // Leave blocks
         offset_x = wind_x + wobble_x + gust_x;
         offset_z = wind_z + wobble_z + gust_z;
     } else if(VERTICES_TALL_GRASS_TOP_TOP(UV_Texture.x, UV_Texture.y)) {
+        // Upper block of 2 tall blocks
         offset_x = wind_x*2 + wobble_x + gust_x*0.7;
         offset_z = wind_z*2 + wobble_z + gust_z*0.7;
     } else if(
@@ -95,6 +99,7 @@ void main() {
         || VERTICES_TALL_GRASS_BOTTOM(UV_Texture.x, UV_Texture.y)
         || VERTICES_TALL_GRASS_TOP(UV_Texture.x, UV_Texture.y)
     ) {
+        // 1 tall blocks
         offset_x = wind_x + wobble_x + gust_x*0.7;
         offset_z = wind_z + wobble_z + gust_z*0.7;
     }
