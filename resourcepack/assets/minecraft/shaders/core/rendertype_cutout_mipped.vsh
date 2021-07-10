@@ -35,6 +35,7 @@ out vec4 normal;
 #define VERTICES_ATLAS_TEXTURE(u, v, x, y) x >= u/atlasTileDim && x <= (u+16)/atlasTileDim && y >= v/atlasTileDim && y <= (v+16)/atlasTileDim
 #define VERTICES_ATLAS_TEXTURE_TOP(u, v, x, y) x >= u/atlasTileDim && x <= (u+16)/atlasTileDim && y >= v/atlasTileDim && y <= (v+1)/atlasTileDim
 
+// Leaves
 #define VERTICES_ACACIA_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/acacia_leaves'].u }}, {{ texture_atlas.uvs['block/acacia_leaves'].v }}, x, y)
 #define VERTICES_AZALEA_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/azalea_leaves'].u }}, {{ texture_atlas.uvs['block/azalea_leaves'].v }}, x, y)
 #define VERTICES_BIRCH_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/birch_leaves'].u }}, {{ texture_atlas.uvs['block/birch_leaves'].v }}, x, y)
@@ -43,10 +44,19 @@ out vec4 normal;
 #define VERTICES_JUNGLE_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/jungle_leaves'].u }}, {{ texture_atlas.uvs['block/jungle_leaves'].v }}, x, y)
 #define VERTICES_OAK_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/oak_leaves'].u }}, {{ texture_atlas.uvs['block/oak_leaves'].v }}, x, y)
 #define VERTICES_SPRUCE_LEAVES(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/spruce_leaves'].u }}, {{ texture_atlas.uvs['block/spruce_leaves'].v }}, x, y)
+
+// Grass
 #define VERTICES_GRASS(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/grass'].u }}, {{ texture_atlas.uvs['block/grass'].v }}, x, y)
 #define VERTICES_TALL_GRASS_TOP(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/tall_grass_top'].u }}, {{ texture_atlas.uvs['block/tall_grass_top'].v }}, x, y)
 #define VERTICES_TALL_GRASS_TOP_TOP(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/tall_grass_top'].u }}, {{ texture_atlas.uvs['block/tall_grass_top'].v }}, x, y)
 #define VERTICES_TALL_GRASS_BOTTOM(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/tall_grass_bottom'].u }}, {{ texture_atlas.uvs['block/tall_grass_bottom'].v }}, x, y)
+
+// Other
+#define VERTICES_AZALEA_SIDE(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/azalea_side'].u }}, {{ texture_atlas.uvs['block/azalea_side'].v }}, x, y)
+#define VERTICES_AZALEA_TOP(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/azalea_top'].u }}, {{ texture_atlas.uvs['block/azalea_top'].v }}, x, y)
+#define VERTICES_FLOWERING_AZALEA_SIDE(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/flowering_azalea_side'].u }}, {{ texture_atlas.uvs['block/flowering_azalea_side'].v }}, x, y)
+#define VERTICES_FLOWERING_AZALEA_TOP(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/flowering_azalea_top'].u }}, {{ texture_atlas.uvs['block/flowering_azalea_top'].v }}, x, y)
+#define VERTICES_AZALEA_PLANT_TOP(x, y) VERTICES_ATLAS_TEXTURE_TOP({{ texture_atlas.uvs['block/azalea_plant'].u }}, {{ texture_atlas.uvs['block/azalea_plant'].v }}, x, y)
 #define VERTICES_VINE(x, y) VERTICES_ATLAS_TEXTURE({{ texture_atlas.uvs['block/vine'].u }}, {{ texture_atlas.uvs['block/vine'].v }}, x, y)
 
 void main() {
@@ -98,10 +108,15 @@ void main() {
         VERTICES_GRASS(UV_Texture.x, UV_Texture.y)
         || VERTICES_TALL_GRASS_BOTTOM(UV_Texture.x, UV_Texture.y)
         || VERTICES_TALL_GRASS_TOP(UV_Texture.x, UV_Texture.y)
+        || VERTICES_AZALEA_SIDE(UV_Texture.x, UV_Texture.y)
+        || VERTICES_AZALEA_TOP(UV_Texture.x, UV_Texture.y)
+        || VERTICES_FLOWERING_AZALEA_SIDE(UV_Texture.x, UV_Texture.y)
+        || VERTICES_FLOWERING_AZALEA_TOP(UV_Texture.x, UV_Texture.y)
+        || VERTICES_AZALEA_PLANT_TOP(UV_Texture.x, UV_Texture.y)
     ) {
         // 1 tall blocks
-        offset_x = wind_x + wobble_x + gust_x*0.7;
-        offset_z = wind_z + wobble_z + gust_z*0.7;
+        offset_x = wind_x*1.4 + wobble_x + gust_x*0.7;
+        offset_z = wind_z*1.4 + wobble_z + gust_z*0.7;
     }
 
     gl_Position = ProjMat * ModelViewMat * vec4(Position + ChunkOffset + vec3(offset_x / tileSizePixels, 0.0, offset_z / tileSizePixels), 1.0);
